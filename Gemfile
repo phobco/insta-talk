@@ -15,6 +15,8 @@ gem 'cssbundling-rails'
 
 gem 'redis', '~> 4.0'
 
+gem 'rails-i18n'
+
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 # Use Sass to process CSS
