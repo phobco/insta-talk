@@ -1,4 +1,6 @@
 class Room < ApplicationRecord
+  has_many :messages
+
   before_create :generate_token
 
   private
