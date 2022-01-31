@@ -1,0 +1,13 @@
+<div class="row mt-1">
+  <div class="col-2 fw-bold text-info">
+    <%= message.user.nickname %>
+  </div>
+
+  <div class="col-10">
+    <div class="float-end small badge badge-light">
+      <%= message.created_at.strftime("%H:%M") %>
+    </div>
+
+    <div><%= message.body %></div>
+  </div>
+</div>
