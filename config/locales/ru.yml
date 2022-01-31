@@ -1,0 +1,4 @@
+ru:
+  rooms:
+    create:
+      room_created: Комната была успешно создана.
