@@ -1,4 +1,4 @@
-class RoomsController < ActionController
+class RoomsController < ApplicationController
   before_action :set_room, only: :show
 
   def index

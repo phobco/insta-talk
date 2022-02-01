@@ -1,19 +1,56 @@
-import consumer from "./consumer"
+import consumer from './consumer'
 
-consumer.subscriptions.create("RoomChannel", {
-  connected() {
-    console.log('Connected to RoomChannel')
-  },
+document.addEventListener('turbo:load', () => {
+  let messages
 
-  disconnected() {
-    console.log('Disonnected from RoomChannel')
-  },
+  messages = document.getElementById('messages')
 
-  received(data) {
-    console.log(data)
-  },
+  if (messages) {
+    createRoomChannel(messages.dataset.roomId)
+  }
 
-  speak: function() {
-    return this.perform('speak');
+  const message = document.getElementById('message_body')
+
+  if (message) {
+    messages.scrollTop = messages.scrollHeight
+
+    message.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && message.value.length > 0) {
+        room.speak(message.value)
+        message.value = ''
+        event.preventDefault()
+      } else if (event.key === 'Enter') {
+        event.preventDefault()
+      }
+    })
   }
 });
+
+let room
+
+const createRoomChannel = (roomId) => {
+  room = consumer.subscriptions.create({
+    channel: 'RoomChannel',
+    roomId: roomId
+  }, {
+    connected() {
+      console.log('Connected to RoomChannel')
+    },
+
+    disconnected() {
+      console.log('Disonnected from RoomChannel')
+    },
+
+    received(data) {
+      console.log(data)
+      messages.innerHTML += data['message']
+      messages.scrollTop = messages.scrollHeight
+    },
+
+    speak: function(message) {
+      return this.perform('speak', {
+        message: message
+      });
+    }
+  });
+}
