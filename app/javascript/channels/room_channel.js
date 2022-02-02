@@ -24,7 +24,7 @@ document.addEventListener('turbo:load', () => {
       }
     })
   }
-});
+})
 
 let room
 
@@ -50,7 +50,7 @@ const createRoomChannel = (roomId) => {
     speak: function(message) {
       return this.perform('speak', {
         message: message
-      });
+      })
     }
-  });
+  })
 }
