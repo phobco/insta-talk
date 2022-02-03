@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   before_create :generate_nickname
 
-  scope :online, -> { where(is_online: true) }
+  scope :online, -> { where(online: true) }
 
   private
 
