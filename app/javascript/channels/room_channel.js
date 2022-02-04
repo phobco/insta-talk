@@ -15,11 +15,12 @@ document.addEventListener('turbo:load', () => {
     messages.scrollTop = messages.scrollHeight
 
     message.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && message.value.length > 0) {
-        room.speak(message.value)
-        message.value = ''
-        event.preventDefault()
-      } else if (event.key === 'Enter') {
+      if (event.key === 'Enter') {
+        if (message.value.length > 0) {
+          room.speak(message.value)
+          message.value = ''
+        }
+
         event.preventDefault()
       }
     })
