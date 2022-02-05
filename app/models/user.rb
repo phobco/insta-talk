@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :messages, dependent: :destroy
+
   before_create :generate_nickname
 
   scope :online, -> { where(online: true) }

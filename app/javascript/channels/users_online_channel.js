@@ -1,32 +1,47 @@
 import consumer from "./consumer"
 
+function findOrAppendTag(user, ul) {
+  for (const li of ul.children) {
+    if (user['nickname'] === li.innerText) {
+      return
+    }
+  }
+
+  let li = document.createElement('li')
+
+  li.append(user['nickname'])
+  ul.append(li)
+}
+
+function removeTag(user, ul) {
+  for (const li of ul.children) {
+    if (user['nickname'] === li.innerText) {
+      li.remove()
+    }
+  }
+}
+
 consumer.subscriptions.create("UsersOnlineChannel", {
   connected() {
+    console.log('Connected USERS_ONLINE')
   },
 
   disconnected() {
+    console.log('DISCONNECTED')
   },
 
   received(data) {
-    let users = document.getElementById('users')
-    
-    if (users) {
-      users.innerHTML = ''
+    const ul = document.getElementById('users')
 
-      let result = new DocumentFragment()
-
-      data['object'].forEach((element) => {
-        let li = document.createElement('li')
-        li.append(element['nickname'])
-        result.append(li)
-      })
-  
-      users.append(result)
+    if (ul) {
+      let user = data['object']
+      
+      user['online'] ? findOrAppendTag(user, ul) : removeTag(user, ul)
     }
   },
 
   speak: function(data) {
-    return this.perform('speak', {
+    return this.perform('broadcast', {
       object: data
     })
   }
