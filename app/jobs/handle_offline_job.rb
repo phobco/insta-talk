@@ -2,7 +2,7 @@ class HandleOfflineJob < ApplicationJob
   queue_as :critical
 
   def perform(user)
-    return if user.still_connected?
+    return if UsersOnlineChannel.broadcast_to(user, action: 'presence-check').to_i.positive?
 
     UserStatus.make_offline(user)
   end
