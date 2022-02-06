@@ -5,6 +5,15 @@ class User < ApplicationRecord
 
   scope :online, -> { where(online: true) }
 
+  def still_connected?
+    status =
+      UsersOnlineChannel.broadcast_to(self, action: 'presence-check')
+
+    return true if status.is_a?(Integer) && status.positive?
+
+    false
+  end
+
   private
 
   def generate_nickname
