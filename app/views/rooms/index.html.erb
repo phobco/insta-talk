@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-6 text-center">
-    <h1><%= t('index.rooms') %></h1>
+    <h2><%= t('index.rooms') %></h2>
 
     <ul class="mt-4 list-unstyled">
       <%= render @rooms %>
@@ -14,10 +14,10 @@
   </div>
 
   <div class="col-6 text-center">
-    <h1><%= t('index.online_now') %></h1>
+    <h2><%= t('index.online_now') %></h2>
 
     <ul class="users-list mt-4 list-unstyled text-success" id="users">
-      <%= render partial: 'users/user', collection: users_online, as: 'user' %>
+      <%= render @users_online %>
     </ul>
   </div>
 </div>
