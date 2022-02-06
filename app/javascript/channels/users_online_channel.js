@@ -1,28 +1,28 @@
-import consumer from "./consumer"
+import consumer from './consumer'
 
-function findOrAppendTag(user, ul) {
-  for (const li of ul.children) {
-    if (user['id'] == li.id) {
-      return
-    }
+function findOrAppendTag(user) {
+  let li = document.getElementById(`user_online_${user['id']}`)
+
+  if (li) {
+    return
   }
 
-  let li = document.createElement('li')
+  const ul = document.getElementById('users')
+
+  li = document.createElement('li')
+  li.id = `user_online_${user['id']}`
 
   li.append(user['nickname'])
-  li.id = user['id']
   ul.append(li)
 }
 
-function removeTag(user, ul) {
-  for (const li of ul.children) {
-    if (user['id'] == li.id) {
-      li.remove()
-    }
-  }
+function removeTag(user) {
+  const li = document.getElementById(`user_online_${user['id']}`)
+
+  li.remove()
 }
 
-consumer.subscriptions.create("UsersOnlineChannel", {
+consumer.subscriptions.create('UsersOnlineChannel', {
   connected() {
   },
 
@@ -30,10 +30,6 @@ consumer.subscriptions.create("UsersOnlineChannel", {
   },
 
   received(user) {
-    const ul = document.getElementById('users')
-
-    if (ul) {
-      user['online'] ? findOrAppendTag(user, ul) : removeTag(user, ul)
-    }
+    user['online'] ? findOrAppendTag(user) : removeTag(user)
   }
 })
