@@ -27,3 +27,5 @@ bin/dev
 ```
 localhost:3000
 ```
+### or
+Try it live [Instatalk](https://fast-instatalk.herokuapp.com/) (wait about 10 seconds for the server to start)
