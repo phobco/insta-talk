@@ -14,7 +14,7 @@ class UsersOnlineChannel < ApplicationCable::Channel
 
   def handle_offline
     HandleOfflineJob.
-    set(wait_until: Time.zone.now + 5).
-    perform_later(current_user)
+      set(wait_until: 5.seconds.from_now).
+      perform_later(current_user)
   end
 end
