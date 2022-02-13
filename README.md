@@ -9,23 +9,28 @@ Upon entering the web page, the user is given a random name and can create rooms
 
 ### Usage:
 
-1. Clone repository
+1. Clone repo
 ```
-git clone git@github.com:phobco/instatalk.git
+$ git clone git@github.com:phobco/instatalk.git
 ```
-2. Run commands
+
+2. Install gems
 ```
-bundle install
-bundle exec rails db:create
-bundle exec rails db:migrate
+$ bundle
 ```
-3. Start server
+
+3. Create database and run migrations (`PostgreSQL` database is used)
 ```
-bin/dev
+$ rails db:create
+$ rails db:migrate
 ```
-4. Open in browser
+
+4. Start server
 ```
-localhost:3000
+$ bin/dev
 ```
+Open `localhost:3000` in browser
+
 ### or
+
 Try it live [Instatalk](https://fast-instatalk.herokuapp.com/) (wait about 10 seconds for the server to start)
