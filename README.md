@@ -30,7 +30,3 @@ $ rails db:migrate
 $ bin/dev
 ```
 Open `localhost:3000` in browser
-
-### or
-
-Try it live [Instatalk](https://fast-instatalk.herokuapp.com/) (wait about 10 seconds for the server to start)
